@@ -1,8 +1,8 @@
 "use client";
 
 import React, { use, useState } from "react";
-import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
+// import Link from "next/link";
+// import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import template from "@/utils/template";
 import Image from "next/image";
