@@ -43,9 +43,9 @@ export default function SideNav() {
           href={item.path}
           className={`${
             pathname === item.path
-              ? "bg-primary text-white"
-              : "hover:bg-gray-100"
-          } flex items-center justify-center md:justify-normal w-full gap-2 p-2  rounded-md cursor-pointer`}
+              ? "bg-primary text-white dark:text-black"
+              : "hover:bg-gray-100 hover:dark:bg-gray-700"
+          } flex items-center justify-center md:justify-normal w-full gap-2 p-2 rounded-md cursor-pointer`}
         >
           {item.icon}
           <span className="hidden md:inline">{item.name}</span>
