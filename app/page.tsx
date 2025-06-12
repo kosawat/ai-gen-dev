@@ -50,10 +50,12 @@ export default function Home() {
           value={prompt}
           onChange={(e) => setPrompt(e.target.value)}
         />
-        <Button>Generate with AI</Button>
+        <Button disabled>Generate with AI</Button>
       </form>
       <Card className="mt-5">
-        <CardHeader className="font-bold text-blue-600">AI Response will appear here</CardHeader>
+        <CardHeader className="font-bold text-blue-600">
+          AI Response will appear here
+        </CardHeader>
         <CardContent>
           {loading ? (
             <Spinner />
