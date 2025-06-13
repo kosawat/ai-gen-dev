@@ -13,7 +13,7 @@ export default function DashboardPage() {
   );
 
   return (
-    <div>
+    <>
       <div className="p-10 my-5 mx-5 mb-5 rounded-lg bg-slate-200 dark:bg-slate-800 flex flex-col justify-center items-center">
         <h1 className="text-xl">What would you like to crate today?</h1>
 
@@ -42,6 +42,6 @@ export default function DashboardPage() {
           </Link>
         ))}
       </div>
-    </div>
+    </>
   );
 }

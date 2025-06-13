@@ -10,6 +10,7 @@ import {
 } from "@clerk/nextjs";
 import Link from "next/link";
 import { ModeToggle } from "../ui/modeToggle";
+import { Toaster } from "react-hot-toast";
 
 export default function TopNav() {
   const { isSignedIn, user } = useUser();
@@ -19,6 +20,7 @@ export default function TopNav() {
 
   return (
     <nav className="flex justify-between items-center p-4 gap-4 h-16 border-b">
+      <Toaster position="top-right" />
       <div className="flex items-center gap-4">
         <Link href="/">Home</Link>
       </div>
