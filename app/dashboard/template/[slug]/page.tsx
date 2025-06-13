@@ -11,9 +11,10 @@ import { Editor } from "@toast-ui/react-editor";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { TemplateProps } from "@/utils/types";
-import { generateContent } from "@/actions/ai";
+import { generateContent, saveQueryToDB } from "@/actions/ai";
 import toast from "react-hot-toast";
 import Link from "next/link";
+import { useUser } from "@clerk/nextjs";
 
 const TemplateSlugPage = ({
   params,
@@ -32,6 +33,10 @@ const TemplateSlugPage = ({
     (item) => item.slug === resolvedParams.slug
   ) as TemplateProps;
 
+  // Get user email from Clerk
+  const { user } = useUser();
+  const userEmail = user?.primaryEmailAddress?.emailAddress || "N/A";
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Submitted query:", query);
@@ -42,6 +47,10 @@ const TemplateSlugPage = ({
     try {
       const generatedContent = await generateContent(prompt);
       console.log("Generated content:", generatedContent);
+
+      // Save the query to the database
+      await saveQueryToDB(t, userEmail, query, generatedContent);
+
       setContent(generatedContent || "No content generated. Please try again.");
     } catch (error) {
       console.error("Error generating content:", error);
