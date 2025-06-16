@@ -24,6 +24,9 @@ export default function TopNav() {
       <div className="flex items-center gap-4">
         <Link href="/">Home</Link>
       </div>
+
+      <Link href="/membership">🔥 Join free or $9.99/month</Link>
+
       <div className="flex items-center justify-end gap-4">
         {isSignedIn && (
           <Link href="/dashboard">{`${user.fullName}`}&apos;s Dashboard</Link>
