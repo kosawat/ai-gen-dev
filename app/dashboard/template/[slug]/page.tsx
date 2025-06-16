@@ -15,6 +15,7 @@ import { generateContent, saveQueryToDB } from "@/actions/ai";
 import toast from "react-hot-toast";
 import Link from "next/link";
 import { useUser } from "@clerk/nextjs";
+import { useUsage } from "@/context/usage";
 
 const TemplateSlugPage = ({
   params,
@@ -37,6 +38,8 @@ const TemplateSlugPage = ({
   const { user } = useUser();
   const userEmail = user?.primaryEmailAddress?.emailAddress || "N/A";
 
+  const { fetchUsageCount } = useUsage();
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Submitted query:", query);
@@ -50,6 +53,7 @@ const TemplateSlugPage = ({
 
       // Save the query to the database
       await saveQueryToDB(t, userEmail, query, generatedContent);
+      fetchUsageCount(userEmail); // Update usage count
 
       setContent(generatedContent || "No content generated. Please try again.");
     } catch (error) {

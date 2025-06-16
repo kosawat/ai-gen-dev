@@ -7,11 +7,11 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="grid grid-cols-4 gap-4">
-      <div className="col-span-1">
+    <div className="flex h-screen">
+      <div className="w-1/4 h-full">
         <SideNav />
       </div>
-      <div className="col-span-3">
+      <div className="flex-1 overflow-y-auto">
         <div className="m-4">{children}</div>
       </div>
     </div>

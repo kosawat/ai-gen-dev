@@ -35,3 +35,11 @@ interface Template {
   icon: string;
   name: string;
 }
+
+export interface UsageContextType {
+  count: number;
+  fetchUsageCount: (email: string) => void;
+  // openModal: boolean;
+  // setOpenModal: (open: boolean) => void;
+  // subscribed: boolean;
+}

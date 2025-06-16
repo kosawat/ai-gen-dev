@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Usage from "./usage";
 
 export default function SideNav() {
   const pathname = usePathname();
@@ -36,7 +37,8 @@ export default function SideNav() {
     },
   ];
   return (
-    <div className="h-screen p-5 shadow-sm border">
+    <div className="flex flex-col h-screen p-5 shadow-sm border">
+      <div className="flex-1 space-y-2">
       {menu.map((item, index) => (
         <Link
           key={index}
@@ -51,6 +53,10 @@ export default function SideNav() {
           <span className="hidden md:inline">{item.name}</span>
         </Link>
       ))}
+      </div>
+      <div className="pb-20 mt-auto">
+        <Usage />
+      </div>
     </div>
   );
 }

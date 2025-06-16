@@ -92,3 +92,47 @@ export async function getQueriesByEmail(
     throw new Error("Failed to fetch queries");
   }
 }
+
+export async function usageCount(email: string) {
+  try {
+    await db();
+
+    const currentDate = new Date();
+    const currentYear = currentDate.getFullYear();
+    const currentMonth = currentDate.getMonth() + 1;
+
+    const result = await Query.aggregate([
+      {
+        $match: {
+          email: email,
+          $expr: {
+            $and: [
+              { $eq: [{ $year: "$createdAt" }, currentYear] },
+              { $eq: [{ $month: "$createdAt" }, currentMonth] },
+            ],
+          },
+        },
+      },
+      {
+        $project: {
+          wordCount: {
+            $size: {
+              $split: [{ $trim: { input: "$content" } }, " "],
+            },
+          },
+        },
+      },
+      {
+        $group: {
+          _id: null,
+          totalWords: { $sum: "$wordCount" },
+        },
+      },
+    ]);
+
+    return { count: result.length > 0 ? result[0].totalWords : 0 };
+  } catch (error) {
+    console.error("Error counting usage:", error);
+    throw new Error("Failed to count usage");
+  }
+}

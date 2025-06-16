@@ -3,7 +3,8 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import TopNav from "@/components/nav/top-nav";
-import { ThemeProvider } from "@/components/theme-provider";
+import { ThemeProvider } from "@/context/theme-provider";
+import { UsageProvider } from "@/context/usage";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,10 +38,12 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <header>
-              <TopNav />
-            </header>
-            {children}
+            <UsageProvider>
+              <header>
+                <TopNav />
+              </header>
+              {children}
+            </UsageProvider>
           </ThemeProvider>
         </body>
       </html>
