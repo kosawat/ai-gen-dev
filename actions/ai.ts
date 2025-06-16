@@ -54,10 +54,41 @@ export async function saveQueryToDB(
     };
   } catch (error) {
     console.error("Error saving query to database:", error);
-    return {
-      ok: false,
-      message: "Failed to save query to database",
-      error: error instanceof Error ? error.message : "Unknown error",
-    };
+    throw new Error("Failed to save query to database");
+  }
+}
+
+export async function getQueriesByEmail(
+  email: string,
+  page: number = 1,
+  pageSize: number = 10
+) {
+  console.log("Fetching queries for email:", email);
+  if (!email) {
+    throw new Error("Email is required");
+  }
+
+  try {
+    await db(); // Ensure the database connection is established
+
+    const skip = (page - 1) * pageSize; // Calculate the number of documents to skip
+    const totalQueries = await Query.countDocuments({ email }); // Count total queries for pagination
+    const totalPages = Math.ceil(totalQueries / pageSize); // Calculate total pages
+
+    // Fetch queries with pagination
+    const queries = await Query.find({ email })
+      .skip(skip)
+      .limit(pageSize)
+      .sort({ createdAt: -1 });
+
+    console.log(
+      `Fetched ${queries.length} queries for email: ${email}, page: ${page}`
+    );
+    console.log("Queries fetched successfully:", queries);
+
+    return { queries, totalPages, page };
+  } catch (error) {
+    console.error("Error fetching queries:", error);
+    throw new Error("Failed to fetch queries");
   }
 }
