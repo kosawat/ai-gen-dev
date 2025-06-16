@@ -39,7 +39,7 @@ interface Template {
 export interface UsageContextType {
   count: number;
   fetchUsageCount: (email: string) => void;
-  // openModal: boolean;
-  // setOpenModal: (open: boolean) => void;
+  openModal: boolean;
+  setOpenModal: (open: boolean) => void;
   // subscribed: boolean;
 }

@@ -7,7 +7,10 @@ const Usage = () => {
   const { count } = useUsage();
 
   const credits = process.env.NEXT_PUBLIC_CREDITS_LIMIT || "10000"; // Default to 10000 if not set
-  const percentageUsed = ((count / parseInt(credits, 10)) * 100).toFixed(2);
+  const percentageUsed = Math.min(
+    (count / parseInt(credits, 10)) * 100,
+    100
+  ).toFixed(2); // Calculate percentage used, ensuring it does not exceed 100%
 
   return (
     <div className="m-2">

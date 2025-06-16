@@ -10,10 +10,13 @@ const UsageContext = createContext<UsageContextType | null>(null);
 export const UsageProvider = ({ children }: { children: React.ReactNode }) => {
   // state
   const [count, setCount] = useState(0);
+  const [openModal, setOpenModal] = useState(false);
 
   // hooks
   const { user } = useUser();
   const userEmail = user?.primaryEmailAddress?.emailAddress || "N/A";
+
+  const credits = parseInt(process.env.NEXT_PUBLIC_CREDITS_LIMIT || "10000"); // Default to 10000 if not set
 
   const fetchUsageCount = async (email: string) => {
     try {
@@ -31,8 +34,16 @@ export const UsageProvider = ({ children }: { children: React.ReactNode }) => {
     }
   }, [userEmail]);
 
+  useEffect(() => {
+    if (count > credits) {
+      setOpenModal(true);
+    }
+  }, [count]);
+
   return (
-    <UsageContext.Provider value={{ count, fetchUsageCount }}>
+    <UsageContext.Provider
+      value={{ count, fetchUsageCount, openModal, setOpenModal }}
+    >
       {children}
     </UsageContext.Provider>
   );
