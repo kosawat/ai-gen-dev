@@ -1,10 +1,11 @@
 "use client";
-import React from "react";
+
+import React, { useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import toast from "react-hot-toast";
 import { SignInButton, useUser } from "@clerk/nextjs";
-// import { createCheckoutSession } from "@/actions/stripe";
+import { createCheckoutSession } from "@/actions/stripe";
 import { useRouter } from "next/navigation";
 import { Loader2Icon } from "lucide-react";
 
@@ -16,15 +17,11 @@ export default function PlanCard({
   image: string;
 }) {
   // state
-  const [loading, setLoading] = React.useState(false);
+  const [loading, setLoading] = useState(false);
   // hook
   const { isSignedIn, isLoaded } = useUser();
 
   const router = useRouter();
-
-  const createCheckoutSession = async () => {
-    return { url: "/dashboard", error: null }; // Mocked response for demo purposes
-  };
 
   const handleCheckout = async () => {
     if (name == "Free") {

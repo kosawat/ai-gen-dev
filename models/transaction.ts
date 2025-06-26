@@ -1,5 +1,4 @@
-import mongoose from "mongoose";
-const { Schema } = mongoose;
+import mongoose, { Schema, model } from "mongoose";
 
 const TransactionSchema = new Schema(
   {
@@ -17,7 +16,6 @@ const TransactionSchema = new Schema(
 );
 
 const Transaction =
-  mongoose.models.Transaction ||
-  mongoose.model("Transaction", TransactionSchema);
+  mongoose.models.Transaction || model("Transaction", TransactionSchema);
 
 export default Transaction;
