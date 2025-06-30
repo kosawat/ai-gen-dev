@@ -41,5 +41,5 @@ export interface UsageContextType {
   fetchUsageCount: (email: string) => void;
   openModal: boolean;
   setOpenModal: (open: boolean) => void;
-  // subscribed: boolean;
+  subscribed: boolean;
 }

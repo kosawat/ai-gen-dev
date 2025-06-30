@@ -13,6 +13,7 @@ import SignUpModal from "../modal/sign-up-modal";
 
 export default function SideNav() {
   const pathname = usePathname();
+
   console.log("Pathname:", pathname);
 
   const menu = [

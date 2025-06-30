@@ -11,21 +11,30 @@ import {
 import Link from "next/link";
 import { ModeToggle } from "../ui/modeToggle";
 import { Toaster } from "react-hot-toast";
+import Image from "next/image";
+import { useUsage } from "@/context/usage";
 
 export default function TopNav() {
   const { isSignedIn, user } = useUser();
-
-  console.log("User:", user);
-  console.log("isSignedIn:", isSignedIn);
+  const { subscribed } = useUsage();
 
   return (
     <nav className="flex justify-between items-center p-4 gap-4 h-16 border-b">
       <Toaster position="top-right" />
       <div className="flex items-center gap-4">
-        <Link href="/">Home</Link>
+        <Link href="/">
+          <Image
+            src={"/ai-gen-logo.png"}
+            height={50}
+            width={50}
+            alt="AI Gen Logo"
+          />
+        </Link>
       </div>
 
-      <Link href="/membership">🔥 Join free or $9.99/month</Link>
+      {!subscribed && (
+        <Link href="/membership">🔥 Join free or $9.99/month</Link>
+      )}
 
       <div className="flex items-center justify-end gap-4">
         {isSignedIn && (

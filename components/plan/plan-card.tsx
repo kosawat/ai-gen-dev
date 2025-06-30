@@ -35,7 +35,7 @@ export default function PlanCard({
         const { url, error } = response;
 
         if (error) {
-          toast.error(error);
+          toast.error(error, { position: "top-center" });
           return;
         }
 
@@ -44,7 +44,9 @@ export default function PlanCard({
         }
       } catch (error) {
         console.error("Error creating checkout session:", error);
-        toast.error("An unexpected error occurred. Please try again later.");
+        toast.error("An unexpected error occurred. Please try again later.", {
+          position: "top-center",
+        });
       } finally {
         setLoading(false);
       }

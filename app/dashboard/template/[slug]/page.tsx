@@ -38,7 +38,7 @@ const TemplateSlugPage = ({
   const { user } = useUser();
   const userEmail = user?.primaryEmailAddress?.emailAddress || "N/A";
 
-  const { fetchUsageCount } = useUsage();
+  const { fetchUsageCount, subscribed, count } = useUsage();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -133,14 +133,19 @@ const TemplateSlugPage = ({
             ))}
             <Button
               type="submit"
-              className="w-full py-6 cursor-pointer"
-              disabled={loading}
+              className="w-full py-6 cursor-pointer overflow-auto"
+              disabled={
+                loading ||
+                (!subscribed &&
+                  count >=
+                    parseInt(process.env.NEXT_PUBLIC_CREDITS_LIMIT || "0"))
+              }
             >
-              {loading ? (
-                <Loader2Icon className="animate-spin mr-2" />
-              ) : (
-                "Generate Content"
-              )}
+              {loading && <Loader2Icon className="animate-spin mr-2" />}
+              {subscribed ||
+              count < Number(process.env.NEXT_PUBLIC_CREDITS_LIMIT)
+                ? "Generate content"
+                : "Subscribe to generate content"}
             </Button>
           </form>
         </div>

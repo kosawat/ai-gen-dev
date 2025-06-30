@@ -13,7 +13,7 @@ import { Button } from "@/components/ui/button";
 export default function SignUpModal() {
   const { openModal, setOpenModal } = useUsage();
 
-  const credits = parseInt(process.env.NEXT_PUBLIC_CREDITS_LIMIT || "10000"); // Default to 10000 if not set
+  const credits = parseInt(process.env.NEXT_PUBLIC_CREDITS_LIMIT || "0");
 
   return (
     <Dialog

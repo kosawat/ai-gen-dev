@@ -4,13 +4,12 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 const Usage = () => {
-  const { count } = useUsage();
+  const { count, subscribed } = useUsage();
 
-  const credits = process.env.NEXT_PUBLIC_CREDITS_LIMIT || "10000"; // Default to 10000 if not set
-  const percentageUsed = Math.min(
-    (count / parseInt(credits, 10)) * 100,
-    100
-  ).toFixed(2); // Calculate percentage used, ensuring it does not exceed 100%
+  const credits = process.env.NEXT_PUBLIC_CREDITS_LIMIT || "0";
+  const percentageUsed = subscribed
+    ? 100
+    : Math.min((count / parseInt(credits, 10)) * 100, 100).toFixed(2); // Calculate percentage used, ensuring it does not exceed 100%
 
   return (
     <div className="m-2">
@@ -29,14 +28,19 @@ const Usage = () => {
             ? `Unlimited credits`
             : `${count} / ${credits} credit used`}
         </h2> */}
-        <h2 className="text-sm my-2">{`${count} / ${credits} credit used`}</h2>
+        <h2 className="text-sm my-2">
+          {subscribed
+            ? "Unlimited credits"
+            : `${count} / ${credits} credit used`}
+        </h2>
       </div>
-
-      <Link href="/membership">
-        <Button className="w-full my-3 cursor-pointer" variant="secondary">
-          Upgrade
-        </Button>
-      </Link>
+      {!subscribed && (
+        <Link href="/membership">
+          <Button className="w-full my-3 cursor-pointer" variant="secondary">
+            Upgrade
+          </Button>
+        </Link>
+      )}
     </div>
   );
 };
