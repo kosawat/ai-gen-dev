@@ -102,3 +102,28 @@ export async function checkSubscription(): Promise<{
     return { error: "Checking subscription failed." };
   }
 }
+
+export async function createCustomerPortalSession(): Promise<string | null> {
+  const user = await currentUser();
+  const customerEmail = user?.emailAddresses[0].emailAddress;
+
+  try {
+    const transaction = await Transaction.findOne({
+      customerEmail,
+    });
+
+    console.log("Transaction found;", transaction);
+
+    const portalSession = await stripe.billingPortal.sessions.create({
+      customer: transaction.customerId,
+      return_url: `${process.env.NEXT_PUBLIC_URL}/dashboard`,
+    });
+
+    console.log("Customer portal session created;", portalSession);
+
+    return portalSession.url ?? `${process.env.NEXT_PUBLIC_URL}/dashboard`;
+  } catch (error) {
+    console.error("Error creating customer portal session", error);
+    return null;
+  }
+}
