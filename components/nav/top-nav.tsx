@@ -36,6 +36,8 @@ export default function TopNav() {
         <Link href="/membership">🔥 Join free or $9.99/month</Link>
       )}
 
+      {/* <Link href="/gen-ai">Gen AI</Link> */}
+
       <div className="flex items-center justify-end gap-4">
         {isSignedIn && (
           <Link href="/dashboard">{`${user.fullName}`}&apos;s Dashboard</Link>
