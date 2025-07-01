@@ -1,5 +1,7 @@
 "use client";
 
+import PromoCard from "@/components/cards/promo-card";
+import SignInModal from "@/components/modal/sign-in-modal";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
@@ -14,7 +16,7 @@ export default function Home() {
 
         <div className="relative z-10 flex items-center justify-center h-full">
           <div className="text-center">
-            {/* <SignInModal /> */}
+            <SignInModal />
             <h1 className="text-white text-7xl font-bold bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 bg-clip-text text-transparent mb-4">
               AI Content Generator
             </h1>
@@ -31,7 +33,7 @@ export default function Home() {
 
       <div className="py-10 px-4">
         <div className="max-w-6xl mx-auto">
-          {/* <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
             <PromoCard
               title="Extensive Template Library"
               description="Choose from a wide range of templates for your content needs"
@@ -55,7 +57,7 @@ export default function Home() {
               description="Generate AI content for your blog, website, or social media with a single click"
               link="/dashboard"
             />
-          </div> */}
+          </div>
         </div>
       </div>
 
