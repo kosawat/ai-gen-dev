@@ -1,33 +1,84 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AI Content Generator
+This is an AI-powered content generation platform built with [Next.js](https://nextjs.org), Stripe, Clerk, and Google GenAI. It allows users to generate blog posts, social media content, and more using customizable templates.
+
+## Features
+
+- Extensive template library for various content types
+- AI-powered content generation (Google GenAI)
+- Membership and billing via Stripe
+- User authentication via Clerk
+- Usage tracking and credit limits
+- Responsive UI with Tailwind CSS
+
+## Required Environment Variables
+
+Before running the project, set the following environment variables in your `.env.local` file:
+
+```env
+# MongoDB connection string
+MONGODB_URI=your_mongodb_connection_string
+
+# Stripe keys and price ID
+STRIPE_SECRET_KEY=your_stripe_secret_key
+STRIPE_MONTHLY_PRICE_ID=your_stripe_monthly_price_id
+STRIPE_WEBHOOK_SECRET=your_stripe_webhook_secret
+
+# Google GenAI API key
+GOOGLE_GEN_AI_API_KEY=your_google_genai_api_key
+
+# Clerk configuration
+CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
+CLERK_SECRET_KEY=your_clerk_secret_key
+
+# Public site URL
+NEXT_PUBLIC_URL=http://localhost:3000
+
+# Monthly credits limit (number of words)
+NEXT_PUBLIC_CREDITS_LIMIT=10000
+```
 
 ## Getting Started
 
-First, run the development server:
+1. **Install dependencies:**
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+   ```sh
+   npm install
+   # or
+   yarn install
+   ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. **Set up environment variables:**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+   Create a `.env.local` file in the root directory and add all required variables as shown above.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+3. **Run the development server:**
+
+   ```sh
+   npm run dev
+   # or
+   yarn dev
+   ```
+
+4. **Open the app:**
+
+   Visit [http://localhost:3000](http://localhost:3000) in your browser.
+
+## Project Structure
+
+- `app/` – Next.js app directory (pages, layouts, API routes)
+- `components/` – UI components
+- `context/` – React context providers
+- `models/` – Mongoose models
+- `utils/` – Utility functions
+- `actions/` – Server actions (AI, Stripe, etc.)
 
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Stripe Docs](https://stripe.com/docs)
+- [Clerk Docs](https://clerk.com/docs)
+- [Google GenAI Docs](https://ai.google.dev/)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
 ## Deploy on Vercel
 
