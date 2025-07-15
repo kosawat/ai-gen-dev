@@ -58,7 +58,7 @@ const template = [
     aiPrompt: "How to reply to this email: ",
     form: [
       {
-        label: "Enter your youtube video topic keyowords",
+        label: "Enter the Email message you want to reply to",
         field: "textarea",
         name: "keywords",
         required: true,
